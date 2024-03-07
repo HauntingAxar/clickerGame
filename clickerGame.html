@@ -17,13 +17,25 @@
             </div>
         </div>
         <div>
+            <p id="scoreUpdated">Cookies: 0</p>
         </div>
         <button id="clear" name="clear">Clear</button>
-        <ul></ul>
     </div>
 </div>
 <script>
+    let score = 0;
+    let addition = 1;
+    const cookie = document.getElementById('point');
+    const scoreUpdated = document.getElementById('scoreUpdated');
 
+    cookie.addEventListener('click', function (e){
+        addCookie();
+    });
+
+    function addCookie(){
+        score = score + addition;
+        scoreUpdated.textContent = `Cookies: ${score}`;
+    }
 </script>
 </body>
 </html>
