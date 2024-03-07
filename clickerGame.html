@@ -27,6 +27,7 @@
     let addition = 1;
     const cookie = document.getElementById('point');
     const scoreUpdated = document.getElementById('scoreUpdated');
+    const clearButton = document.getElementById('clear');
 
     cookie.addEventListener('click', function (e){
         addCookie();
@@ -36,6 +37,10 @@
         score = score + addition;
         scoreUpdated.textContent = `Cookies: ${score}`;
     }
+
+    clearButton.addEventListener('click', function(e){
+        scoreUpdated.textContent = `Cookies: 0`;
+    })
 </script>
 </body>
 </html>
