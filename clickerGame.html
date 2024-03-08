@@ -20,6 +20,7 @@
             <p id="scoreUpdated">Cookies: 0</p>
         </div>
         <button id="clear" name="clear">Clear</button>
+        <button id="buy" name="buy">Shop</button>
     </div>
 </div>
 <script>
@@ -28,9 +29,21 @@
     const cookie = document.getElementById('point');
     const scoreUpdated = document.getElementById('scoreUpdated');
     const clearButton = document.getElementById('clear');
+    let pointButton = document.querySelector('img');
+    const buy = document.getElementById('buy');
+    let neededCookies = 10;
 
-    cookie.addEventListener('click', function (e){
+    cookie.addEventListener('click', function(e){
         addCookie();
+        if(score >= 10){
+            pointButton.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuBjR56NYPaPmWCSxTuyLyzt77zyYvVSMI6A&usqp=CAU'
+        }
+        if(score >= 20){
+            pointButton.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS4sfw9zxavsoW_iqo0WFc8F-HC1oUzei0lg&usqp=CAU'
+        }
+        if(score >= 30){
+            pointButton.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzyBeYeO1B1hDOCUStvx2vZvrsRZePiuht1A&usqp=CAU'
+        }
     });
 
     function addCookie(){
@@ -39,8 +52,18 @@
     }
 
     clearButton.addEventListener('click', function(e){
+        score = 0;
         scoreUpdated.textContent = `Cookies: 0`;
-    })
+        pointButton.src='https://images.vexels.com/media/users/3/151625/isolated/preview/0484184d72076b38f8b68869d565ab1b-chocolate-chip-cookie-icon.png'
+    });
+
+    function shop(){
+        if (score >= neededCookies){
+             scoreUpdated = scoreUpdated * 2;
+            score = score-neededCookies;
+
+        }
+    }
 </script>
 </body>
 </html>
