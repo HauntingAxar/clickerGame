@@ -19,8 +19,14 @@
         <div>
             <p id="scoreUpdated">Cookies: 0</p>
         </div>
+        <p>By buying from the shop you multiply your cookies by 2x for every click! Sometimes clicking over and over gets a bit annoying, use the 2x button to buy twice in one click!</p>
+            <button id="buy" name="buy">Shop: 10</button>
+        <button id="x2" name="x2">Buy 2x</button>
+        <div style="line-height:150%;">
+            <br>
+            <br>
+        </div>
         <button id="clear" name="clear">Clear</button>
-        <button id="buy" name="buy">Shop</button>
     </div>
 </div>
 <script>
@@ -30,8 +36,9 @@
     const scoreUpdated = document.getElementById('scoreUpdated');
     const clearButton = document.getElementById('clear');
     let pointButton = document.querySelector('img');
-    const buy = document.getElementById('buy');
+    const buyButton = document.getElementById('buy');
     let neededCookies = 10;
+    const tenBuy = document.getElementById('x2');
 
     cookie.addEventListener('click', function(e){
         addCookie();
@@ -54,7 +61,19 @@
     clearButton.addEventListener('click', function(e){
         score = 0;
         scoreUpdated.textContent = `Cookies: 0`;
+        addition = 1;
+        neededCookies = 10;
+        buyButton.textContent = `Shop: ${neededCookies}`;
+
         pointButton.src='https://images.vexels.com/media/users/3/151625/isolated/preview/0484184d72076b38f8b68869d565ab1b-chocolate-chip-cookie-icon.png'
+    });
+
+    buyButton.addEventListener('click', function(e){
+        shop();
+    });
+
+    tenBuy.addEventListener('click', function(e){
+        buyTwo();
     });
 
     function shop(){
@@ -62,7 +81,16 @@
              addition = addition * 2;
             score = score - neededCookies;
             neededCookies = neededCookies + 10;
-
+            scoreUpdated.textContent = `Cookies: ${score}`;
+            buyButton.textContent = `Shop: ${neededCookies}`;
+        }
+    }
+    function buyTwo(){
+        if (score >= neededCookies * 2){
+            addition = addition * 2;
+            score = score - neededCookies;
+            neededCookies = neededCookies * 2;
+            scoreUpdated.textContent = `Cookies: ${score}`
         }
     }
 </script>
