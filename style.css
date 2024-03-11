@@ -10,7 +10,7 @@ label {
     line-height: 1.25rem;
     font-weight: 500;
     font-size:14px;
-color: #374151;
+    color: #374151;
 }
 
 input[type="text"], textarea, select{
@@ -74,4 +74,8 @@ section header{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.column {
+    float: right;
+    width: 50%;
 }
