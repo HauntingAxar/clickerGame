@@ -17,6 +17,7 @@
                 <br>
                 <br>
             </div>
+            <p id="messages"></p>
         </div>
         <h1>Cookie Clicker</h1>
         <div class="row">
@@ -28,6 +29,7 @@
         </div>
         <div>
             <p id="scoreUpdated">Cookies: 0</p>
+            <p id="perClick">Cookies Per Click: 1</p>
         </div>
         <button id="clear" name="clear">Clear</button>
     </div>
@@ -42,6 +44,8 @@
     const buyButton = document.getElementById('buy');
     let neededCookies = 10;
     const tenBuy = document.getElementById('x2');
+    const addMessage = document.getElementById('message');
+    const perClick = document.getElementById('perClick');
 
     cookie.addEventListener('click', function(e){
         addCookie();
@@ -59,6 +63,7 @@
     function addCookie(){
         score = score + addition;
         scoreUpdated.textContent = `Cookies: ${score}`;
+        simpleMessages();
     }
 
     clearButton.addEventListener('click', function(e){
@@ -67,6 +72,7 @@
         addition = 1;
         neededCookies = 10;
         buyButton.textContent = `Shop: ${neededCookies}`;
+        perClick.textContent = `Cookies Per Click: 1`
 
         pointButton.src='https://images.vexels.com/media/users/3/151625/isolated/preview/0484184d72076b38f8b68869d565ab1b-chocolate-chip-cookie-icon.png'
     });
@@ -86,14 +92,23 @@
             neededCookies = neededCookies + 10;
             scoreUpdated.textContent = `Cookies: ${score}`;
             buyButton.textContent = `Shop: ${neededCookies}`;
+            perClick.textContent = `Cookies Per Click: ${addition}`;
         }
     }
     function buyTwo(){
         if (score >= neededCookies * 2){
             addition = addition * 2;
             score = score - neededCookies;
-            neededCookies = neededCookies * 2;
+            neededCookies = neededCookies + 20;
             scoreUpdated.textContent = `Cookies: ${score}`
+        }
+    }
+    function simpleMessages() {
+        if (score >= 10){
+            addMessage.textContent = `Your family starts trying your cookies.`
+        }
+        if (score >= 20){
+            addMessage.textContent = `Keep going! Neighbors are starting to love the cookies!`
         }
     }
 </script>
