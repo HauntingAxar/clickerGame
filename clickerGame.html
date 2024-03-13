@@ -61,7 +61,7 @@
     });
 
     function addCookie(){
-        score = score + addition;
+        score += addition;
         scoreUpdated.textContent = `Cookies: ${score}`;
         simpleMessages();
     }
@@ -78,29 +78,27 @@
     });
 
     buyButton.addEventListener('click', function(e){
-        shop();
+        buyMore(1);
     });
 
     tenBuy.addEventListener('click', function(e){
-        buyTwo();
+        buyMore(2);
     });
 
     function shop(){
         if (score >= neededCookies){
-             addition = addition * 2;
-            score = score - neededCookies;
-            neededCookies = neededCookies + 10;
-            scoreUpdated.textContent = `Cookies: ${score}`;
-            buyButton.textContent = `Shop: ${neededCookies}`;
-            perClick.textContent = `Cookies Per Click: ${addition}`;
+            purchaseUpgrade();
         }
     }
-    function buyTwo(){
-        if (score >= neededCookies * 2){
-            addition = addition * 2;
-            score = score - neededCookies;
-            neededCookies = neededCookies + 20;
-            scoreUpdated.textContent = `Cookies: ${score}`
+    function purchaseUpgrade(){
+        addition *= 2;
+        score -= neededCookies;
+        neededCookies += 10;
+        updateScores();
+    }
+    function buyMore(times){
+        for(let i = 0; i < times; i++){
+            shop();
         }
     }
     function simpleMessages() {
@@ -110,6 +108,11 @@
         if (score >= 20){
             addMessage.textContent = `Keep going! Neighbors are starting to love the cookies!`
         }
+    }
+    function updateScores(){
+        scoreUpdated.textContent = `Cookies: ${score}`;
+        buyButton.textContent = `Shop: ${neededCookies}`;
+        perClick.textContent = `Cookies Per Click: ${addition}`;
     }
 </script>
 </body>
