@@ -10,14 +10,20 @@
     <div class="content">
         <div class="column">
             <h3>---------------Shop Area---------------</h3>
-            <p>By buying from the shop you multiply your cookies by 2x for every click! Sometimes clicking over and over gets a bit annoying, use the 2x button to buy twice in one click!</p>
+            <p>By buying from the shop you multiply your cookies by 2x for every click! Sometimes clicking over and over gets a bit annoying, use the 2x button to buy twice in one click!
+            <br>
+                <br>
+                &#9888; ! Hint: Since the score goes up everytime, to buy 2x the first time you need 30 cookies ! &#9888;
+                <br>
+                &#9888; ! Hint: For 10x the starting number of cookies needed is 550 ! &#9888;</p>
             <button id="buy" name="buy">Shop: 10</button>
             <button id="x2" name="x2">Buy 2x</button>
+            <button id="x10" name="x10">Buy 10x</button>
             <div style="line-height:150%;">
                 <br>
                 <br>
             </div>
-            <p id="messages"></p>
+            <p id="message"></p>
         </div>
         <h1>Cookie Clicker</h1>
         <div class="row">
@@ -43,7 +49,8 @@
     let pointButton = document.querySelector('img');
     const buyButton = document.getElementById('buy');
     let neededCookies = 10;
-    const tenBuy = document.getElementById('x2');
+    const twoBuy = document.getElementById('x2');
+    const tenBuy = document.getElementById('x10')
     const addMessage = document.getElementById('message');
     const perClick = document.getElementById('perClick');
 
@@ -57,6 +64,15 @@
         }
         if(score >= 30){
             pointButton.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzyBeYeO1B1hDOCUStvx2vZvrsRZePiuht1A&usqp=CAU'
+        }
+        if(score >= 100){
+            pointButton.src='https://d3awvtnmmsvyot.cloudfront.net/api/file/O8HYNuYwRGawh6dwvMzj/convert?fit=max&w=1450&quality=60&cache=true&rotate=exif&compress=true'
+        }
+        if(score >= 200){
+            pointButton.src='https://as2.ftcdn.net/v2/jpg/05/96/68/69/1000_F_596686997_aoOfPmyZJBBQLycArWkdIxa0CDnUWMOn.jpg'
+        }
+        if(score >= 300){
+            pointButton.src='https://www.cookietakeabite.com/wp-content/uploads/2018/05/IMG_4370-e1541004505490.jpg'
         }
     });
 
@@ -75,14 +91,19 @@
         perClick.textContent = `Cookies Per Click: 1`
 
         pointButton.src='https://images.vexels.com/media/users/3/151625/isolated/preview/0484184d72076b38f8b68869d565ab1b-chocolate-chip-cookie-icon.png'
+        addMessage.textContent = " "
     });
 
     buyButton.addEventListener('click', function(e){
         buyMore(1);
     });
 
-    tenBuy.addEventListener('click', function(e){
+    twoBuy.addEventListener('click', function(e){
         buyMore(2);
+    });
+
+    tenBuy.addEventListener('click', function(e){
+        buyMore(10);
     });
 
     function shop(){
@@ -107,6 +128,18 @@
         }
         if (score >= 20){
             addMessage.textContent = `Keep going! Neighbors are starting to love the cookies!`
+        }
+        if (score >= 30){
+            addMessage.textContent = `You've started to branch out to different flavors!`
+        }
+        if (score >= 100){
+            addMessage.textContent = `You have your own home business!`
+        }
+        if (score >= 200){
+            addMessage.textContent = `The business is growing well!`
+        }
+        if (score >= 300){
+            addMessage.textContent = `You're now able to have your friends help with the business as well as pay them!`
         }
     }
     function updateScores(){
