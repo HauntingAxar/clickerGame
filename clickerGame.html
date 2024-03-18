@@ -23,6 +23,8 @@
                 <br>
                 <br>
             </div>
+            <br>
+            <button id="exClicker">Extra Clicker: 10</button>
             <p id="message"></p>
         </div>
         <h1>Cookie Clicker</h1>
@@ -43,11 +45,14 @@
 <script>
     let score = 0;
     let addition = 1;
+    let cps = 0;
+    let neededAuto = 10;
     const cookie = document.getElementById('point');
     const scoreUpdated = document.getElementById('scoreUpdated');
     const clearButton = document.getElementById('clear');
     let pointButton = document.querySelector('img');
     const buyButton = document.getElementById('buy');
+    const cpsButton = document.getElementById('exClicker');
     let neededCookies = 10;
     const twoBuy = document.getElementById('x2');
     const tenBuy = document.getElementById('x10')
@@ -105,6 +110,28 @@
     tenBuy.addEventListener('click', function(e){
         buyMore(10);
     });
+
+    cpsButton.addEventListener('click', function(e){
+        autoShop();
+    });
+    setInterval(autoAdd, 1000);
+
+    function autoAdd(){
+        score += cps;
+        scoreUpdated.textContent = `Cookies: ${score}`;
+        cpsButton.textContent = `Extra Clicker: ${neededCookies}`;
+    }
+    function autoShop(){
+        if (score >= neededAuto){
+            addAuto();
+        }
+    }
+
+    function addAuto(){
+        neededAuto += 2;
+        cps++;
+        score -= neededAuto;
+    }
 
     function shop(){
         if (score >= neededCookies){
