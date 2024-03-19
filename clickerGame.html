@@ -16,17 +16,27 @@
                 &#9888; ! Hint: Since the score goes up everytime, to buy 2x the first time you need 30 cookies ! &#9888;
                 <br>
                 &#9888; ! Hint: For 10x the starting number of cookies needed is 550 ! &#9888;</p>
-            <button id="buy" name="buy">Shop: 10</button>
-            <button id="x2" name="x2">Buy 2x</button>
-            <button id="x10" name="x10">Buy 10x</button>
+            <button class="button" id="buy" name="buy">Shop: 10</button>
+            <button class="button" id="x2" name="x2">Buy 2x</button>
+            <button class="button" id="x10" name="x10">Buy 10x</button>
             <div style="line-height:150%;">
                 <br>
                 <br>
             </div>
             <br>
-            <button id="exClicker">Extra Clicker: 10</button>
+            <button class="button" id="exClicker">Extra Clicker: 10</button>
             <p id="message"></p>
         </div>
+
+        <style>
+            .vl {
+                border-left: 6px solid saddlebrown;
+                height: 434.5px;
+            }
+        </style>
+
+        <div class="vl"></div>
+
         <h1>Cookie Clicker</h1>
         <div class="row">
             <div>
@@ -39,7 +49,7 @@
             <p id="scoreUpdated">Cookies: 0</p>
             <p id="perClick">Cookies Per Click: 1</p>
         </div>
-        <button id="clear" name="clear">Clear</button>
+        <button class="button"  id="clear" name="clear">Clear</button>
     </div>
 </div>
 <script>
@@ -92,11 +102,13 @@
         scoreUpdated.textContent = `Cookies: 0`;
         addition = 1;
         neededCookies = 10;
+        cps = 0;
         buyButton.textContent = `Shop: ${neededCookies}`;
         perClick.textContent = `Cookies Per Click: 1`
 
         pointButton.src='https://images.vexels.com/media/users/3/151625/isolated/preview/0484184d72076b38f8b68869d565ab1b-chocolate-chip-cookie-icon.png'
         addMessage.textContent = " "
+
     });
 
     buyButton.addEventListener('click', function(e){
@@ -119,7 +131,6 @@
     function autoAdd(){
         score += cps;
         scoreUpdated.textContent = `Cookies: ${score}`;
-        cpsButton.textContent = `Extra Clicker: ${neededCookies}`;
     }
     function autoShop(){
         if (score >= neededAuto){
@@ -128,9 +139,11 @@
     }
 
     function addAuto(){
-        neededAuto += 2;
-        cps++;
         score -= neededAuto;
+        neededAuto += 2;
+        cpsButton.textContent = `Extra Clicker: ${neededAuto}`;
+        cps++;
+
     }
 
     function shop(){
