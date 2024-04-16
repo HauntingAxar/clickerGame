@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!--- todo : do the rebirth thing and make it only work if youre at 99,999, also make it so the images aren't silly, and also make it so there is a limit on how many cookies you can have, in which reaching this limit you must rebirth. AND FIX THE BAR IN THE MIDDLE OF THE SCREEN TO NOT BE SO SHORT--->
 <div class="container">
     <div class="content">
         <div class="column">
@@ -38,10 +39,10 @@
         <div class="vl"></div>
 
         <h1>Cookie Clicker</h1>
-        <div class="row">
+        <div class="rowButton">
             <div>
-                <button id="point">
-                    <img src="https://images.vexels.com/media/users/3/151625/isolated/preview/0484184d72076b38f8b68869d565ab1b-chocolate-chip-cookie-icon.png" height="200" width="200">
+                <button id="point" class="cookieButton" >
+                    <img src="https://www.freeiconspng.com/thumbs/cookie/cookie-png-transparent-images-background-23.png" height="200" width="200">
                 </button>
             </div>
         </div>
@@ -49,7 +50,9 @@
             <p id="scoreUpdated">Cookies: 0</p>
             <p id="perClick">Cookies Per Click: 1</p>
         </div>
+        <p id="rebirthLabel" class="hidden">Rebirth Bonus: </p>
         <button class="button"  id="clear" name="clear">Clear</button>
+        <button class="button"  id="rebirth" name="rebirth">Rebirth</button>
     </div>
 </div>
 <script>
@@ -68,20 +71,23 @@
     const tenBuy = document.getElementById('x10')
     const addMessage = document.getElementById('message');
     const perClick = document.getElementById('perClick');
+    let rebirthBonus = 0;
+    const rebirthButton = document.getElementById('rebirth');
+    const rebirthLabel = document.getElementById('rebirthLabel')
 
     cookie.addEventListener('click', function(e){
         addCookie();
         if(score >= 10){
-            pointButton.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuBjR56NYPaPmWCSxTuyLyzt77zyYvVSMI6A&usqp=CAU'
+            pointButton.src='https://cdn.pixabay.com/photo/2022/04/02/12/14/cookies-7106888_1280.png'
         }
         if(score >= 20){
-            pointButton.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS4sfw9zxavsoW_iqo0WFc8F-HC1oUzei0lg&usqp=CAU'
+            pointButton.src='https://clipart-library.com/images_k/transparent-cookies/transparent-cookies-14.png'
         }
         if(score >= 30){
             pointButton.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzyBeYeO1B1hDOCUStvx2vZvrsRZePiuht1A&usqp=CAU'
         }
         if(score >= 100){
-            pointButton.src='https://d3awvtnmmsvyot.cloudfront.net/api/file/O8HYNuYwRGawh6dwvMzj/convert?fit=max&w=1450&quality=60&cache=true&rotate=exif&compress=true'
+            pointButton.src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d2a01df0-0dd9-47e7-9248-cfb31c99e3d8/defyml3-f365e5f9-6710-4173-ab56-4d1594d8d0d4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2QyYTAxZGYwLTBkZDktNDdlNy05MjQ4LWNmYjMxYzk5ZTNkOFwvZGVmeW1sMy1mMzY1ZTVmOS02NzEwLTQxNzMtYWI1Ni00ZDE1OTRkOGQwZDQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.P5sJBEa0CEzP_P-gn9AByNgdL8Hutf9MKzm5Xx3_o-g'
         }
         if(score >= 200){
             pointButton.src='https://as2.ftcdn.net/v2/jpg/05/96/68/69/1000_F_596686997_aoOfPmyZJBBQLycArWkdIxa0CDnUWMOn.jpg'
@@ -92,24 +98,15 @@
     });
 
     function addCookie(){
-        score += addition;
+        score = score + addition + rebirthBonus;
         scoreUpdated.textContent = `Cookies: ${score}`;
         simpleMessages();
     }
 
     clearButton.addEventListener('click', function(e){
-        score = 0;
-        scoreUpdated.textContent = `Cookies: 0`;
-        addition = 1;
-        neededCookies = 10;
-        cps = 0;
-        buyButton.textContent = `Shop: ${neededCookies}`;
-        perClick.textContent = `Cookies Per Click: 1`
-
-        pointButton.src='https://images.vexels.com/media/users/3/151625/isolated/preview/0484184d72076b38f8b68869d565ab1b-chocolate-chip-cookie-icon.png'
-        addMessage.textContent = " "
-        neededAuto = 10;
-        cpsButton.textContent = `Extra Clicker: ${neededAuto}`;
+        reset();
+        rebirthBonus = 0;
+        rebirthLabel.classList.add('hidden')
     });
 
     buyButton.addEventListener('click', function(e){
@@ -187,6 +184,30 @@
         scoreUpdated.textContent = `Cookies: ${score}`;
         buyButton.textContent = `Shop: ${neededCookies}`;
         perClick.textContent = `Cookies Per Click: ${addition}`;
+    }
+    function rebirth(){
+        rebirthBonus += 1;
+        rebirthLabel.classList.remove('hidden')
+        rebirthLabel.textContent = `Rebirth Bonus: ${rebirthBonus}`
+        reset()
+
+    }
+
+    rebirthButton.addEventListener('click', rebirth)
+
+    function reset(){
+        score = 0;
+        scoreUpdated.textContent = `Cookies: 0`;
+        addition = 1;
+        neededCookies = 10;
+        cps = 0;
+        buyButton.textContent = `Shop: ${neededCookies}`;
+        perClick.textContent = `Cookies Per Click: 1`
+
+        pointButton.src='https://images.vexels.com/media/users/3/151625/isolated/preview/0484184d72076b38f8b68869d565ab1b-chocolate-chip-cookie-icon.png'
+        addMessage.textContent = " "
+        neededAuto = 10;
+        cpsButton.textContent = `Extra Clicker: ${neededAuto}`;
     }
 </script>
 </body>

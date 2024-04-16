@@ -89,3 +89,14 @@ section header{
     margin-left: -3px;
     top: 7.5px;
 }
+.cookieButton:active {
+    transform: scale(0.98);
+    background:none;
+}
+
+.cookieButton{
+    background:none;
+}
+.hidden{
+    visibility: hidden;
+}
