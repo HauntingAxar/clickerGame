@@ -52,7 +52,7 @@
         </div>
         <p id="rebirthLabel" class="hidden">Rebirth Bonus: </p>
         <button class="button"  id="clear" name="clear">Clear</button>
-        <button class="button"  id="rebirth" name="rebirth">Rebirth</button>
+        <button class="button"  id="rebirth" name="rebirth">Rebirth (Starts at 100,000 cookies)</button>
     </div>
 </div>
 <script>
@@ -72,6 +72,7 @@
     const addMessage = document.getElementById('message');
     const perClick = document.getElementById('perClick');
     let rebirthBonus = 0;
+    let rebirthCookies = 100000;
     const rebirthButton = document.getElementById('rebirth');
     const rebirthLabel = document.getElementById('rebirthLabel')
 
@@ -187,13 +188,20 @@
     }
     function rebirth(){
         rebirthBonus += 1;
+
         rebirthLabel.classList.remove('hidden')
         rebirthLabel.textContent = `Rebirth Bonus: ${rebirthBonus}`
         reset()
-
+        perClick.textContent = `Cookies Per Click: ${addition+ rebirthBonus}`;
+    }
+    function rebirthCheck(){
+        if (score >= rebirthCookies){
+            rebirth();
+        }
     }
 
-    rebirthButton.addEventListener('click', rebirth)
+
+    rebirthButton.addEventListener('click', rebirthCheck)
 
     function reset(){
         score = 0;
@@ -202,7 +210,7 @@
         neededCookies = 10;
         cps = 0;
         buyButton.textContent = `Shop: ${neededCookies}`;
-        perClick.textContent = `Cookies Per Click: 1`
+        perClick.textContent = `Cookies Per Click: 1`;
 
         pointButton.src='https://images.vexels.com/media/users/3/151625/isolated/preview/0484184d72076b38f8b68869d565ab1b-chocolate-chip-cookie-icon.png'
         addMessage.textContent = " "
