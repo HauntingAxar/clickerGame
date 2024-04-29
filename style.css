@@ -2,7 +2,9 @@
     box-sizing: border-box;
 }
 html, body{
-    background-image: url("https://art.pixilart.com/sr28d5aebf156aws3.png");
+    background-image: url("https://art.pixilart.com/sr2857de4d5c9aws3.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 label {
